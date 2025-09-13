@@ -1,6 +1,8 @@
 # ClunkyQuery
 
-An AI-powered web search engine in Python that goes out of its way to make life difficult. It’s driven by a large language model that plans actions in JSON, then forces Selenium to click around like a confused intern. If you wanted a polished, frictionless search experience, you are in the wrong place.
+An AI-powered web search engine in Python that goes out of its way to make life difficult.  
+It’s driven by a large language model that plans actions in JSON, then forces Selenium to click around like a confused intern.  
+If you wanted a polished, frictionless search experience, you are in the wrong place.
 
 ---
 
@@ -33,19 +35,30 @@ pip install selenium webdriver-manager requests
 
 ## Usage
 
+The main script is `agent_browser.py`. It runs an LLM-powered browser agent that plans each step in JSON and executes with Selenium.
+
 Run the script with a goal:
 
 ```bash
 python agent_browser.py --api-key <YOUR_KEY> --prompt "find latest AI news"
 ```
 
-Options worth knowing:
+### Options
 
-- `--headless` → run without a visible browser  
-- `--steps N` → number of planning rounds (default 3)  
-- `--agents N` → run multiple agents in parallel  
-- `--summarize` → get a half-decent summary at the end  
-- `--keep-open` → stop ClunkyQuery from immediately closing the browser you didn’t want open anyway  
+- `--api-key` → API key (or set env `LLM_API_KEY`)  
+- `--model` → Model ID (default: `llama-3.3-70b-versatile`)  
+- `--provider` → LLM provider (`groq`, `openai`, `together`)  
+- `--endpoint` → Custom API base URL  
+- `--binary` → Path to Chrome/Chromium binary  
+- `--headless` → Run without visible browser  
+- `--steps N` → Number of planning rounds (default 3)  
+- `--agents N` → Run multiple agents in parallel  
+- `--summarize` → Ask LLM to summarize findings  
+- `--summary-file` → Save summary to file  
+- `--keep-open` → Don’t close the browser at the end  
+- `--relevance` → Filter scraped text/links (`off`, `loose`, `strict`)  
+- `--suppress-consecutive-scrapes` → Prevent scraping twice in a row  
+- `--suppress-consecutive-duplicates` → Prevent retrying identical actions  
 
 Full help:
 
